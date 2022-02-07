@@ -12,8 +12,9 @@
     // var_dump(Ticket::get_rows());
     if(isset($_POST['cin'])) {
       $ticket = new Ticket($_POST['name'], $_POST['cin'], $_POST['departID'], $_POST['destinationID'], $_POST['departTime'], $_POST['avionID']);
-      $ticket->add_to_table();
-      // $ticket->delete_from_table();
+      // $ticket->add_to_table();
+      // $ticket->update_in_table('hit', 'ii112233', 2, 1, '2022-11-09T13:00', 1, $ticket->get_id());
+      $ticket->delete_from_table();
     }
   ?>
     <h1>Welcome To The New Age : </h1>
@@ -30,12 +31,18 @@
       </select>
       <select id="" name="destinationID">
         <option selected disabled>choisir votre distination</option>
-        <option value="2">dubai</option>
+        <?php foreach($airports as $item): ?>
+          <option value="<?=$item['id']?>"><?=$item['city']?></option>
+        <?php endforeach; ?>
       </select>
       <input id="" type="datetime-local" name="departTime" placeholder="date de depart" required>
+      <?php require_once './src/Avion.class.php'; ?>
+      <?php $avions = Avion::get_rows(); ?>
       <select id="" name="avionID" required>
         <option selected disabled>choisir une avion</option>
-        <option value="1">avion</option>
+        <?php foreach($avions as $item): ?>
+          <option value="<?=$item['id']?>"><?=$item['name']?></option>
+        <?php endforeach; ?>
       </select>
       <input type="submit" value="Reserver" class="submit">
     </form>

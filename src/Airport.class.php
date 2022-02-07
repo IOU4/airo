@@ -8,9 +8,11 @@ class Airport extends Table {
 
   protected const TABLE = 'Airports';
   protected const ADD_QUERY = 'insert into '.self::TABLE.'(airport, city, country, Distance) values(?, ?, ?, ?);';
+  protected const UPDATE_QUERY = 'update '.self::TABLE.'set airport = ?, city = ?, country = ?, Distance = ? where id = ?';
   protected const DELETE_QUERY = 'delete from '.self::TABLE.'where id = ?;';
   
-  public function __construct($airport, $city, $country, $Distance) {
+  public function __construct($airport, $city, $country, $Distance, $id = null) {
+    $this->id = $id;
     $this->airport = $airport; 
     $this->city = $city; 
     $this->country = $country; 

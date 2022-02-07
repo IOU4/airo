@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS Airo;
+USE Airo;
+CREATE TABLE IF NOT EXISTS Airports (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  airoport VARCHAR(55),
+  city VARCHAR(55),
+  country VARCHAR(55),
+  Distance INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Avions(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(55),
+  type VARCHAR(55),
+  capacite INT,
+  lieuDepart INT NOT NULL,
+  lieuArrive INT NOT NULL,
+  tempDepart TIME NOT NULL,
+  tempVol TIME NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (lieuDepart) REFERENCES Airports(id),
+  FOREIGN KEY (lieuArrive) REFERENCES Airports(id)
+);
+
+CREATE TABLE IF NOT EXISTS Tickets (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  travler VARCHAR(55),
+  cin VARCHAR(20),
+  departID INT NOT NULL,
+  destinationID INT NOT NULL,
+  departTime DATETIME,
+  avionID INT NOT NULL,
+  FOREIGN KEY (departID) REFERENCES Airports(id) ON DELETE CASCADE,
+  FOREIGN KEY (destinationID) REFERENCES Airports(id) ON DELETE CASCADE,
+  FOREIGN KEY (avionID) REFERENCES Avions(id) ON DELETE CASCADE
+);

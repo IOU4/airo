@@ -1,0 +1,49 @@
+:root {
+  --primary: #11121d;
+  --secondary: #c0caf5;
+  font-family: Fantasque Sans Mono;
+  font-size: 26px;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  background: var(--secondary);
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: min(20em, 100%);
+  gap: 1em;
+}
+
+form > * {
+  border: 0.1em solid var(--primary);
+  background: var(--secondary);
+  height: 4em;
+  padding: 0.5em 2em;
+}
+option {
+  color: var(--primary);
+  background: var(--secondary);
+}
+.submit {
+  background: var(--primary);
+  color: var(--secondary);
+  font-weight: bold;
+}
+
+.submit:hover {
+  cursor: pointer;
+}

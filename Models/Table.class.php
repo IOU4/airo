@@ -24,7 +24,6 @@ abstract class Table {
     $dbh = self::connect_to_db();
     $statement = $dbh->prepare(static::ADD_QUERY);
     $statement->execute($this->get_add_query_vars()) or die($statement->errorCode());
-
     // get last inserted id;
     $statement = $dbh->prepare("select last_insert_id();");
     $statement->execute() or die($statement->errorCode());
@@ -46,15 +45,12 @@ abstract class Table {
   public function update_in_table() {
     $class_vars = get_class_vars(get_class($this));
     $passed_vars = func_get_args();
-    var_dump($class_vars);
-    var_dump($passed_vars);
     if(count($class_vars) != func_num_args()) die("parametre number doesn't match ".count($class_vars)." != ".func_num_args());
     $dbh = self::connect_to_db(); 
     $statement = $dbh->prepare(static::UPDATE_QUERY);
     $statement->execute($passed_vars) or die($statement->errorCode());
   }
   public function get_id() {
-    if($this->id) return $this->id;
-    else echo 'not in table';
+    return $this->id;
   }
 }

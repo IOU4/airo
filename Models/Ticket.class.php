@@ -23,10 +23,6 @@ class Ticket extends Table{
     $this->avionID = $avionID;
   }
 
-  public function __destruct() {
-    echo "deleted at id = $this->id";
-  }
-
   protected function get_add_query_vars(){
     return [$this->travler, $this->cin, $this->departID, $this->destinationID, $this->departTime, $this->avionID];
   }

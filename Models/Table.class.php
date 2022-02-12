@@ -5,8 +5,7 @@ abstract class Table {
   public static function get_rows() {
     $dbh = self::connect_to_db();
     $sql = "select * from ".static::TABLE.";";
-    $statement = $dbh->prepare($sql);
-    $statement->execute() or die($statement->errorCode());
+    $statement = $dbh->query($sql) or die($statement->errorCode());
     $resutl = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $resutl;
   }
@@ -20,6 +19,7 @@ abstract class Table {
   }
 
   abstract protected function get_add_query_vars();
+
   public function add_to_table() {
     $dbh = self::connect_to_db();
     $statement = $dbh->prepare(static::ADD_QUERY);
@@ -28,18 +28,12 @@ abstract class Table {
     $statement = $dbh->prepare("select last_insert_id();");
     $statement->execute() or die($statement->errorCode());
     $this->id = $statement->fetch(PDO::FETCH_NUM)[0];
-    echo "<script>alert('added successfully at id = ".$this->id."')</script>";
+    return $this->id;
   }
-  public function delete_from_table() {
-    if(!$this->id) {
-      echo "<script>alert('not in table')</script>";
-      return false;
-    }
+  public static function delete_from_table($id) {
     $dbh = self::connect_to_db();
     $statement = $dbh->prepare(static::DELETE_QUERY);
-    $statement->execute([$this->id]) or die($statement->errorCode());
-    echo "<script>alert('delted successfully at id = ".$this->id."')</script>";
-    return true;
+    $statement->execute([$id]) or die($statement->errorCode());
   }
   // abstract protected function get_update_query_vars();
   public function update_in_table() {

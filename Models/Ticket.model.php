@@ -1,6 +1,6 @@
-<?php 
-require_once './src/Table.class.php';
-class Ticket extends Table{
+<?php
+require_once './Models/Table.class.php';
+class Ticket extends Table {
   protected $travler;
   protected $cin;
   protected $departID;
@@ -26,5 +26,4 @@ class Ticket extends Table{
   protected function get_add_query_vars(){
     return [$this->travler, $this->cin, $this->departID, $this->destinationID, $this->departTime, $this->avionID];
   }
-
 }

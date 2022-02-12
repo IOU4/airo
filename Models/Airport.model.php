@@ -1,5 +1,5 @@
 <?php
-require_once './src/Table.class.php';
+require_once './Models/Table.class.php';
 class Airport extends Table {
   protected $airport;
   protected $city;
